@@ -1,21 +1,17 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { useRegister } from "../../../api/useRegister";
 import Input from "../../../components/Input/Input";
 import ReactLoading from "react-loading";
 import { useFormik } from "formik";
-import { Wrapper, RememberPass, InputContainer } from "../loginStyles";
-
+import { Wrapper, InputContainer } from "../loginStyles";
 import * as Yup from "yup";
-
-export interface RegisterUserType {
-  username: string;
-  email: string;
-  password: string;
-}
+import { RegisterBody } from "./../../../api/useRegister";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const { handleBlur, handleChange, handleSubmit, values, touched, errors } =
-    useFormik({
+    useFormik<RegisterBody>({
       initialValues: {
         username: "",
         email: "",
@@ -29,20 +25,17 @@ const Register = () => {
           .max(12, "Maximum 8 Characters")
           .required("Required"),
       }),
-      onSubmit: (user: RegisterUserType) => {
-        // login(user).then
+      onSubmit: (user) => {
+        register(user, {
+          onSuccess() {
+            navigate("/auth/login");
+          },
+        });
       },
     });
 
-  const navigate = useNavigate();
-  const { mutate: login, data, isLoading } = useRegister(values);
+  const { mutate: register, isLoading } = useRegister();
 
-  const handleRegisterUser = () => {
-    if (data !== undefined) {
-      navigate("/auth/login");
-    } else {
-    }
-  };
   return (
     <>
       <Wrapper>
@@ -73,7 +66,9 @@ const Register = () => {
               value={values.email}
               label="Email"
             />
-            {touched.email && errors.email && <div className="text-danger">{errors.email}</div>}
+            {touched.email && errors.email && (
+              <div className="text-danger">{errors.email}</div>
+            )}
           </InputContainer>
 
           <InputContainer>
@@ -97,7 +92,7 @@ const Register = () => {
           </div>
 
           <button type="submit">Register</button>
-          
+
           <hr />
 
           <div>
