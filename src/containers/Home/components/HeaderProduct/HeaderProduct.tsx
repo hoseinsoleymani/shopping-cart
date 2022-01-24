@@ -1,9 +1,8 @@
 import { FC } from "react";
-import { ProductType } from "./../../Home";
-import ProductTitle from "./../ProductTitle/ProductTitle";
-import ProductPrice from "./../ProductPrice/ProductPrice";
-import ProductOffTitle from "../ProductOffTitle/ProductOffTitle";
-import NewPrice from "./../NewPrice/NewPrice";
+import ProductTitle from "../../../../components/ProductTitle/ProductTitle";
+import ProductPrice from "../../../../components/ProductPrice/ProductPrice";
+import ProductOffTitle from "../../../../components/ProductOffTitle/ProductOffTitle";
+import NewPrice from "../../../../components/NewPrice/NewPrice";
 import { Wrapper } from "./headerProductStyles";
 
 interface Props {

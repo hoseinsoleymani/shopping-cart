@@ -1,4 +1,5 @@
-import { useProducts } from "../../hooks/products";
+import { useEffect } from "react";
+import { useProducts } from "../../api/useProducts";
 import Product from "../../components/Product/Product";
 import { isString } from "formik";
 import Header from "./components/Header/Header";
@@ -7,29 +8,25 @@ import { Main, ProductsList } from "./homeStyles";
 import Title from "./components/Title/Title";
 import FilterBtns from "./components/FilterBtns/FilterBtns";
 import { Container, Row } from "react-bootstrap";
-import { useState } from "react";
-
-export interface ProductType {
-  id: number;
-  title: string;
-  content: string;
-  price: number;
-  offProduct: number;
-  image: {
-    url: string;
-  };
-  amount: number;
-}
+import { useCartStore } from "../../store/store";
+import { MainLayout } from "./../../components/MainLayout";
 
 const Home = () => {
-  const { data, isLoading, isError } = useProducts();
-  const [products, setProducts] = useState(data);
+  const { data, isError } = useProducts();
+
+  const { setProducts } = useCartStore();
+  const { filterProducts } = useCartStore();
+
+  useEffect(() => {
+    if (data != null) {
+      setProducts(data);
+    }
+  }, [data]);
+
   if (isError) return <p>{isError}</p>;
 
-  if (isLoading || isString(data)) return <p>Is Loading....</p>;
-
   return (
-    <>
+    <MainLayout>
       <Header />
 
       <Main>
@@ -48,14 +45,14 @@ const Home = () => {
             <Title title="BEST SELLER" />
             <FilterBtns />
             <Row>
-              {data?.map((product) => (
+              {filterProducts?.map((product) => (
                 <Product key={product.id} product={product} />
               ))}
             </Row>
           </Container>
         </ProductsList>
       </Main>
-    </>
+    </MainLayout>
   );
 };
 

@@ -14,14 +14,14 @@ export const filterBtnData: FilterBtnData[] = [
   },
   {
     id: 3,
-    text: "Sneakers",
-  },
-  {
-    id: 3,
-    text: "Belt",
+    text: "Sneaker",
   },
   {
     id: 4,
-    text: "Sunglasses",
+    text: "Belt",
+  },
+  {
+    id: 5,
+    text: "Sunglass",
   },
 ];

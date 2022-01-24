@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useLogin } from "../../hooks/products";
+import { useLogin } from "../../api/useLogin";
 import Input from "../../components/Input/Input";
 import { isString, useFormik } from "formik";
 import * as Yup from "yup";
 import ReactLoading from "react-loading";
+import { LoginBody } from "./../../api/useLogin";
 
 export interface loginUserType {
   identifier: string;
@@ -12,8 +13,9 @@ export interface loginUserType {
 }
 
 const Login = () => {
+  const navigate = useNavigate();
   const { handleBlur, handleChange, handleSubmit, values, touched, errors } =
-    useFormik({
+    useFormik<LoginBody>({
       initialValues: {
         identifier: "",
         password: "",
@@ -24,26 +26,19 @@ const Login = () => {
         password: Yup.string().required("Required"),
       }),
 
-      onSubmit: (user: loginUserType) => {
-        mutate(user);
+      onSubmit: (user) => {
+        login(user)
+          .then((res) => {
+            localStorage.setItem("token", res.jwt);
+            navigate("/");
+          })
+          .catch((error) => {
+            error.response;
+          });
       },
     });
 
-  const { mutate, data, isLoading } = useLogin(values);
-
-  const navigate = useNavigate();
-
-  const handleLoginUser = () => {
-    if (!isString(data) && data != null) {
-      localStorage.setItem("token", data.jwt);
-      navigate("/");
-    } else {
-    }
-  };
-
-  useEffect(() => {
-    handleLoginUser();
-  }, [data]);
+  const { mutateAsync: login, isLoading } = useLogin();
 
   return (
     <div className="form__container">
@@ -53,9 +48,9 @@ const Login = () => {
         <div className="form__item">
           <Input
             type="email"
-            inputName="identifier"
-            handleOnChange={handleChange}
-            handleOnBlur={handleBlur}
+            name="identifier"
+            onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="example@mail.com"
             value={values.identifier}
           />
@@ -67,9 +62,9 @@ const Login = () => {
         <div className="form__item">
           <Input
             type="password"
-            inputName="password"
-            handleOnChange={handleChange}
-            handleOnBlur={handleBlur}
+            name="password"
+            onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="at least 8"
             value={values.password}
           />

@@ -1,10 +1,9 @@
 import { FC } from "react";
 import { Col } from "react-bootstrap";
-import { ProductType } from "../../containers/Home/Home";
-import ProductTitle from "./../../containers/Home/components/ProductTitle/ProductTitle";
-import NewPrice from "./../../containers/Home/components/NewPrice/NewPrice";
-import ProductPrice from "./../../containers/Home/components/ProductPrice/ProductPrice";
-import ProductOffTitle from "./../../containers/Home/components/ProductOffTitle/ProductOffTitle";
+import ProductTitle from "../ProductTitle/ProductTitle";
+import NewPrice from "../NewPrice/NewPrice";
+import ProductPrice from "../ProductPrice/ProductPrice";
+import ProductOffTitle from "../ProductOffTitle/ProductOffTitle";
 import { ProductImgLink, Wrapper } from "./ProductStyles";
 import StarGray from "../../svg/Star-gray.svg";
 import StarGold from "../../svg/Star-gold.svg";
@@ -13,7 +12,7 @@ interface Props {
 }
 
 const Product: FC<Props> = ({ product }) => {
-  const { id, title, content, price, image, offProduct } = product;
+  const { id, title, price, image, offProduct } = product;
   const addOffToPrice = offProduct * price;
   const currentPrice = Math.floor(addOffToPrice / 100);
 

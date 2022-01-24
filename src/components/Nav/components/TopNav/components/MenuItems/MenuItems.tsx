@@ -16,6 +16,7 @@ const MenuItems = () => {
   useEffect(() => {
     handleProductsCounter();
   }, [cartProducts]);
+
   return (
     <NavMenu>
       <li>

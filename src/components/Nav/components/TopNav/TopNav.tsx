@@ -26,8 +26,8 @@ const TopNav = () => {
         </RightNav>
       ) : (
         <LoginWrapper>
-          <MenuItem link="login" text="Login" />
-          <MenuItem link="register" text="Register" marginRNone={true} />
+          <MenuItem link="/auth/login" text="Login" />
+          <MenuItem link="/auth/register" text="Register" marginRNone={true} />
         </LoginWrapper>
       )}
     </Wrapper>

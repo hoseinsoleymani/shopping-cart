@@ -1,39 +1,41 @@
 import create from "zustand";
-import { ProductType } from "./../containers/Home/Home";
-
 interface AuthStore {
   user: any;
   isLogin: boolean;
-  falseIsLogin: () => any;
-  trueIsLogin: () => any;
-  setUser: (user: any) => any;
+  logout: () => void;
+  login: (user: User) => void;
 }
 
 interface CartStore {
-  products: ProductType[];
-  productsCounter: number;
+  products: ProductType[] | undefined;
+  filterProducts: ProductType[] | undefined;
   cartProducts: ProductType[];
+  productsCounter: number;
+  productAmount: number;
   handleProductsCounter: () => void;
   addToCart: (product: ProductType) => void;
   removeFromCart: (product: ProductType) => void;
   removeCurrentProduct: (product: ProductType) => void;
+  handleFilterProduct: (category: string) => void;
+  setProducts: (data: ProductType[]) => void;
 }
 
 const useAuthStore = create<AuthStore>(
   (set): AuthStore => ({
     user: undefined,
-    setUser: (user) => set({ user: user }),
     isLogin: false,
-    falseIsLogin: () => set(() => ({ isLogin: false })),
-    trueIsLogin: () => set(() => ({ isLogin: true })),
+    logout: () => set(() => ({ user: undefined, isLogin: false })),
+    login: (user: User) => set(() => ({ user, isLogin: true })),
   })
 );
 
 const useCartStore = create<CartStore>(
-  (set): CartStore => ({
+  (set, get): CartStore => ({
     products: [],
     cartProducts: [],
+    filterProducts: [],
     productsCounter: 0,
+    productAmount: 0,
     handleProductsCounter: () =>
       set((state) => {
         {
@@ -55,11 +57,34 @@ const useCartStore = create<CartStore>(
             item.id === product.id ? { ...item, amount: item.amount + 1 } : item
           );
 
-          return { cartProducts: currentCart };
+          return {
+            cartProducts: currentCart,
+            productAmount: isExistProduct.amount + 1,
+          };
         }
 
         return {
           cartProducts: [...state.cartProducts, { ...product, amount: 1 }],
+          productAmount: 1,
+        };
+      });
+    },
+
+    removeFromCart: (product: ProductType) => {
+      set((state) => {
+        let productAmount = 0;
+        const currentCart = state.cartProducts
+          .map((item) => {
+            if (item.id === product.id) {
+              productAmount = item.amount - 1;
+              return { ...item, amount: item.amount - 1 };
+            } else return item;
+          })
+          .filter((item) => item.amount > 0);
+
+        return {
+          cartProducts: [...currentCart],
+          productAmount,
         };
       });
     },
@@ -73,15 +98,29 @@ const useCartStore = create<CartStore>(
         return { cartProducts: [...currentCart] };
       });
     },
-    removeFromCart: (product: ProductType) => {
-      set((state) => {
-        const currentCart = state.cartProducts
-          .map((item) =>
-            item.id === product.id ? { ...item, amount: item.amount - 1 } : item
-          )
-          .filter((item) => item.amount > 0);
 
-        return { cartProducts: [...currentCart] };
+    setProducts: (data: ProductType[]) => {
+      set(() => {
+        return {
+          products: data,
+          filterProducts: data,
+        };
+      });
+    },
+
+    handleFilterProduct: (category: string) => {
+      set((state) => {
+        if (category.toLowerCase() === "all") {
+          return { filterProducts: state.products };
+        }
+
+        const currentProducts = state.products?.filter(
+          (item) => item.categories.toLowerCase() === category.toLowerCase()
+        );
+
+        return {
+          filterProducts: currentProducts,
+        };
       });
     },
   })

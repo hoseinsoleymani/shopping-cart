@@ -1,46 +1,70 @@
-import React from "react";
 import { useParams } from "react-router-dom";
-import { useProduct } from "../../hooks/products";
+import { useProduct } from "../../api/useProduct";
 import { isString } from "formik";
-import { useCartStore } from "../../store/store";
+import ProductImage from "./components/ProductImage/ProductImage";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
+import { Col, Container, Row } from "react-bootstrap";
+import BreadCrumb from "../BreadCrumb/BreadCrumb";
+import { MainLayout } from "../MainLayout";
+import ProductSlider from "./components/ProductSlider/ProductSlider";
+import ProductTab from "./components/ProductTab/ProductTab";
+import Title from "../../containers/Home/components/Title/Title";
+import { useProducts } from "../../api/useProducts";
+import Product from "../Product/Product";
 
 const ProductPage = () => {
   let { id } = useParams();
 
   const { data } = useProduct(id);
-
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { data: products } = useProducts();
 
   if (data === null || isString(data) || data === undefined)
     return <p>Loading....</p>;
-  const { title, content, price, image } = data;
 
+  if (products == null) return <p>Loading...</p>;
   return (
-    <article className="product__page">
-      <div>
-        <img
-          src={`http://localhost:1337${image.url}`}
-          className="product__image"
-          alt={title}
-        />
-      </div>
+    <MainLayout>
+      <BreadCrumb passLinks={["Home", "products"]} currentPass={data.title} />
 
-      <div>
-        <p className="product__desc">{content}</p>
+      <section className="my-5">
+        <Container>
+          <Row>
+            <Col xs="12" md="6" lg="4">
+              <ProductImage
+                anotherImages={data.anotherImage}
+                image={data.image}
+              />
+            </Col>
 
-        <div className="product__title">
-          <span className="product__price">{price}$</span>
-          <span className="product__btn">{title}</span>
-        </div>
+            <Col xs="12" md="6" lg="5">
+              <ProductDetails product={data} />
+            </Col>
 
-        <button
-          className="product-page__btn"
-          onClick={() => addToCart(data)}
-        >
-          Add To Cart
-        </button>
-      </div>
-    </article>
+            <Col xs="12" md="6" lg="3">
+              <ProductSlider />
+            </Col>
+          </Row>
+
+          <Row>
+            <ProductTab />
+          </Row>
+        </Container>
+      </section>
+
+      <section className="pt-4">
+        <Title title="RELATED PRODUCTS" />
+
+        <Container>
+          <div className="py-5">
+            <Row>
+              {products.slice(0, 4).map((item) => (
+                <Product product={item} key={item.id} />
+              ))}
+            </Row>
+          </div>
+        </Container>
+      </section>
+    </MainLayout>
   );
 };
 

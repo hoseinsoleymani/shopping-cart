@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useRegister } from "../../hooks/products";
+import { useRegister } from "../../api/useRegister";
 import Input from "../../components/Input/Input";
 import ReactLoading from "react-loading";
 import { useFormik } from "formik";
@@ -29,24 +28,19 @@ const Register = () => {
           .required("Required"),
       }),
       onSubmit: (user: RegisterUserType) => {
-        mutate(user);
+        // login(user).then
       },
     });
 
   const navigate = useNavigate();
-  const { mutate, data, isLoading } = useRegister(values);
+  const { mutate: login, data, isLoading } = useRegister(values);
 
   const handleRegisterUser = () => {
     if (data !== undefined) {
-      navigate("/login");
+      navigate("/auth/login");
     } else {
     }
   };
-
-  useEffect(() => {
-    handleRegisterUser();
-  }, [data]);
-
   return (
     <>
       <div className="form__container">
@@ -55,9 +49,9 @@ const Register = () => {
           <div className="form__item">
             <Input
               type="text"
-              inputName="username"
-              handleOnChange={handleChange}
-              handleOnBlur={handleBlur}
+              name="username"
+              onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="User Name"
               value={values.username}
             />
@@ -69,9 +63,9 @@ const Register = () => {
           <div className="form__item">
             <Input
               type="email"
-              inputName="email"
-              handleOnChange={handleChange}
-              handleOnBlur={handleBlur}
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="example@mail.com"
               value={values.email}
             />
@@ -83,9 +77,9 @@ const Register = () => {
           <div className="form__item">
             <Input
               type="password"
-              inputName="password"
-              handleOnChange={handleChange}
-              handleOnBlur={handleBlur}
+              name="password"
+              onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="at least 8"
               value={values.password}
             />
