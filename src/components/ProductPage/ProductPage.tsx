@@ -24,7 +24,7 @@ const ProductPage = () => {
   if (products == null) return <p>Loading...</p>;
   return (
     <MainLayout>
-      <BreadCrumb passLinks={["Home", "products"]} currentPass={data.title} />
+      {/* <BreadCrumb passLinks={["Home", "products"]} currentPass={data.title} /> */}
 
       <section className="my-5">
         <Container>
