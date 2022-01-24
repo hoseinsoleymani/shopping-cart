@@ -33,7 +33,7 @@ const Login = () => {
             navigate("/");
           })
           .catch((error) => {
-            error.response;
+            console.log(error.response);
           });
       },
     });
