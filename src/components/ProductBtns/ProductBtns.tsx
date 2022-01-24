@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useAuthStore, useCartStore } from "../../store/store";
 import { ProductBtnsEl } from "./productBtnsStyles";
 

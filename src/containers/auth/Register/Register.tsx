@@ -1,8 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useRegister } from "../../api/useRegister";
-import Input from "../../components/Input/Input";
+import { useRegister } from "../../../api/useRegister";
+import Input from "../../../components/Input/Input";
 import ReactLoading from "react-loading";
 import { useFormik } from "formik";
+import { Wrapper, RememberPass, InputContainer } from "../loginStyles";
+
 import * as Yup from "yup";
 
 export interface RegisterUserType {
@@ -43,10 +45,10 @@ const Register = () => {
   };
   return (
     <>
-      <div className="form__container">
-        <h2 className="form__title">Register</h2>
-        <form action="" className="form" onSubmit={handleSubmit}>
-          <div className="form__item">
+      <Wrapper>
+        <h2>Register</h2>
+        <form action="" onSubmit={handleSubmit}>
+          <InputContainer>
             <Input
               type="text"
               name="username"
@@ -54,13 +56,14 @@ const Register = () => {
               onBlur={handleBlur}
               placeholder="User Name"
               value={values.username}
+              label="User Name"
             />
 
             {touched.username && errors.username && (
-              <div className="error__message">{errors.username}</div>
+              <div className="text-danger">{errors.username}</div>
             )}
-          </div>
-          <div className="form__item">
+          </InputContainer>
+          <InputContainer>
             <Input
               type="email"
               name="email"
@@ -68,13 +71,12 @@ const Register = () => {
               onBlur={handleBlur}
               placeholder="example@mail.com"
               value={values.email}
+              label="Email"
             />
-            {touched.email && errors.email && (
-              <div className="error__message">{errors.email}</div>
-            )}
-          </div>
+            {touched.email && errors.email && <div className="text-danger">{errors.email}</div>}
+          </InputContainer>
 
-          <div className="form__item">
+          <InputContainer>
             <Input
               type="password"
               name="password"
@@ -82,38 +84,32 @@ const Register = () => {
               onBlur={handleBlur}
               placeholder="at least 8"
               value={values.password}
+              label="Password"
             />
             {touched.password && errors.password && (
-              <div className="error__message">{errors.password}</div>
+              <div className="text-danger">{errors.password}</div>
             )}
-          </div>
+          </InputContainer>
 
-          <div className="form__checkbox">
+          <div>
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember Me</label>
           </div>
 
-          <button className="product-page__btn" type="submit">
-            Register
-          </button>
-
+          <button type="submit">Register</button>
+          
           <hr />
 
-          <div className="have-account">
+          <div>
             Already have an account
             <br />
             <NavLink to="/register">Login</NavLink>
           </div>
         </form>
         {isLoading && (
-          <ReactLoading
-            type={"bars"}
-            color={"#45486e"}
-            width={175}
-            className="loading"
-          />
+          <ReactLoading type={"bars"} color={"#45486e"} width={175} />
         )}
-      </div>
+      </Wrapper>
       )
     </>
   );

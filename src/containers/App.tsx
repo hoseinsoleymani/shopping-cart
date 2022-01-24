@@ -7,8 +7,8 @@ import { decodedToken } from "./../utils/decoded";
 
 const Home = lazy(() => import("./Home/Home"));
 const ProductPage = lazy(() => import("../components/ProductPage/ProductPage"));
-const Register = lazy(() => import("./Register/Register"));
-const Login = lazy(() => import("./Login/Login"));
+const Register = lazy(() => import("./auth/Register/Register"));
+const Login = lazy(() => import("./auth/Login/Login"));
 const NotFound = lazy(() => import("./NotFound/NotFound"));
 const Products = lazy(() => import("./Products/Products"));
 const Contact = lazy(() => import("./Contact/Contact"));

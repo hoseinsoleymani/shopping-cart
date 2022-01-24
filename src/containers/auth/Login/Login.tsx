@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useLogin } from "../../api/useLogin";
-import Input from "../../components/Input/Input";
-import { isString, useFormik } from "formik";
+import { useLogin } from "../../../api/useLogin";
+import Input from "../../../components/Input/Input";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import ReactLoading from "react-loading";
-import { LoginBody } from "./../../api/useLogin";
+import { LoginBody } from "../../../api/useLogin";
+import { Wrapper, RememberPass , InputContainer} from "../loginStyles";
 
 export interface loginUserType {
   identifier: string;
@@ -41,11 +42,11 @@ const Login = () => {
   const { mutateAsync: login, isLoading } = useLogin();
 
   return (
-    <div className="form__container">
-      <h2 className="form__title">Log in</h2>
+    <Wrapper>
+      <h3>Log in</h3>
 
-      <form action="" className="form" onSubmit={handleSubmit}>
-        <div className="form__item">
+      <form action="" onSubmit={handleSubmit}>
+        <InputContainer>
           <Input
             type="email"
             name="identifier"
@@ -55,11 +56,11 @@ const Login = () => {
             value={values.identifier}
           />
           {touched.identifier && errors.identifier && (
-            <div className="error__message">{errors.identifier}</div>
+            <div className="text-danger">{errors.identifier}</div>
           )}
-        </div>
+        </InputContainer>
 
-        <div className="form__item">
+        <InputContainer>
           <Input
             type="password"
             name="password"
@@ -68,31 +69,25 @@ const Login = () => {
             placeholder="at least 8"
             value={values.password}
           />
-          {touched.password && errors.password && (
-            <div className="error__message">{errors.password}</div>
-          )}
-        </div>
+          {touched.password && errors.password && <div className="text-danger">{errors.password}</div>}
+        </InputContainer>
 
-        <div className="form__checkbox">
+        <RememberPass>
           <input type="checkbox" id="remember-me" />
           <label htmlFor="remember-me">Remember Me</label>
-        </div>
+        </RememberPass>
 
-        <button className="product-page__btn" type="submit">
-          Log in
-        </button>
+        <button type="submit" className="button">Log in</button>
 
-        <NavLink to="/forgot-password" className="forgot__btn">
-          Forgot Password
-        </NavLink>
+        <NavLink to="/forgot-password">Forgot Password</NavLink>
 
         <hr />
 
-        <div className="have-account">
+        <p className="last">
           Dont have an account?
           <br />
           <NavLink to="/register">Register</NavLink>
-        </div>
+        </p>
       </form>
 
       {isLoading && (
@@ -103,7 +98,7 @@ const Login = () => {
           className="loading"
         />
       )}
-    </div>
+    </Wrapper>
   );
 };
 
