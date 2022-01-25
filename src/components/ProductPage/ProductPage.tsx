@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useProduct } from "../../api/useProduct";
-import { isString } from "formik";
 import ProductImage from "./components/ProductImage/ProductImage";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { Col, Container, Row } from "react-bootstrap";
@@ -15,29 +14,27 @@ import Product from "../Product/Product";
 const ProductPage = () => {
   let { id } = useParams();
 
-  const { data } = useProduct(id);
+  const { data: product } = useProduct(id);
   const { data: products } = useProducts();
 
-  if (data === null || isString(data) || data === undefined)
-    return <p>Loading....</p>;
+  if (products == null || product == null) return <p></p>;
 
-  if (products == null) return <p>Loading...</p>;
   return (
     <MainLayout>
-      {/* <BreadCrumb passLinks={["Home", "products"]} currentPass={data.title} /> */}
+      <BreadCrumb crumbs={["Home", "products", product.title]} />
 
       <section className="my-5">
         <Container>
           <Row>
             <Col xs="12" md="6" lg="4">
               <ProductImage
-                anotherImages={data.anotherImage}
-                image={data.image}
+                anotherImages={product.anotherImage}
+                image={product.image}
               />
             </Col>
 
             <Col xs="12" md="6" lg="5">
-              <ProductDetails product={data} />
+              <ProductDetails product={product} />
             </Col>
 
             <Col xs="12" md="6" lg="3">

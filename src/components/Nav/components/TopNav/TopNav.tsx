@@ -11,7 +11,6 @@ const TopNav = () => {
   return (
     <Wrapper>
       <ChooseLanguage />
-
       {isLogin ? (
         <RightNav className="d-flex">
           <MenuItems />

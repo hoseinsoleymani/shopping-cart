@@ -1,4 +1,4 @@
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useRegister } from "../../../api/useRegister";
 import Input from "../../../components/Input/Input";
 import ReactLoading from "react-loading";

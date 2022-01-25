@@ -8,6 +8,4 @@ const getProducts = (): Promise<ProductType[]> =>
     .catch((ex) => ex);
 
 export const useProducts = () =>
-  useQuery<ProductType[]>("products", getProducts, {
-
-  });
+  useQuery<ProductType[]>("products", getProducts, {});
