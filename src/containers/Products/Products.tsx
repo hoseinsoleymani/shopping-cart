@@ -17,7 +17,7 @@ const Banner = lazy(() => import("./../../components/Banner/Banner"));
 const BreadCrumb = lazy(() => import("../../components/BreadCrumb/BreadCrumb"));
 
 const Products = () => {
-  const { filterProductsByPrice: products } = useCartStore();
+  const { filterProductsByPrice: products, productsLength } = useCartStore();
 
   if (products == null) return <h2></h2>;
 
@@ -34,14 +34,16 @@ const Products = () => {
                   <Prices />
                   <Color />
                   <HotDeals hotDeals={hotDeals} title="BRAND" />
-                  <Link to="/" className="button">MORE</Link>
+                  <Link to="/" className="button">
+                    MORE
+                  </Link>
                 </FilterWrapper>
               </Col>
               <Col md="12" lg="9">
                 <Banner />
                 <Nav />
                 <div className="d-flex flex-wrap justify-content-between">
-                  {products.map((product) => (
+                  {products.slice(0, productsLength).map((product) => (
                     <Product key={product.id} product={product} />
                   ))}
                 </div>

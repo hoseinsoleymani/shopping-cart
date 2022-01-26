@@ -14,6 +14,7 @@ interface CartStore {
   productsCounter: number;
   productAmount: number;
   priceRange: number;
+  productsLength: number;
   handleProductsCounter: () => void;
   addToCart: (product: ProductType) => void;
   removeFromCart: (product: ProductType) => void;
@@ -21,6 +22,8 @@ interface CartStore {
   handleFilterProduct: (category: string) => void;
   setProducts: (data: ProductType[]) => void;
   handleFilterPriceProducts: (e: any) => void;
+  handleProductsNumber: (e: any) => void;
+  handleProductsFilter: (sortBy: string) => void
 }
 
 const useAuthStore = create<AuthStore>(
@@ -41,6 +44,7 @@ const useCartStore = create<CartStore>(
     productsCounter: 0,
     productAmount: 0,
     priceRange: 0,
+    productsLength: 0,
     handleProductsCounter: () =>
       set((state) => {
         {
@@ -110,6 +114,7 @@ const useCartStore = create<CartStore>(
           products: data,
           filterProducts: data,
           filterProductsByPrice: data,
+          productsLength: data.length,
         };
       });
     },
@@ -129,6 +134,7 @@ const useCartStore = create<CartStore>(
         };
       });
     },
+
     handleFilterPriceProducts: (e: any) => {
       set((state) => {
         const selectedPrice = e.target.value;
@@ -147,6 +153,17 @@ const useCartStore = create<CartStore>(
         };
       });
     },
+
+    handleProductsNumber: (e: any) => {
+      const currentValue = e.target.value;
+      set(() => ({ productsLength: +currentValue }));
+    },
+
+    handleProductsFilter: (sortBy: string) => {
+      set((state) => {
+        // const currentProducts = state.products?.filter( )
+      })
+    }
   })
 );
 
