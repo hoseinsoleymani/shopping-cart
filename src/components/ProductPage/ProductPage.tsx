@@ -55,7 +55,9 @@ const ProductPage = () => {
           <div className="py-5">
             <Row>
               {products.slice(0, 4).map((item) => (
-                <Product product={item} key={item.id} />
+                <Col key={item.id} xs="12" lg="3">
+                  <Product product={item} key={item.id} />
+                </Col>
               ))}
             </Row>
           </div>

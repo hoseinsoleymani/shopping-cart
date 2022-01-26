@@ -4,9 +4,12 @@ export const BreadcrumbWrapper = styled.ol`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
-  padding: 1rem 0;
-
+  background-color: #f9f9f9;
+  padding: 0.4rem 0;
+  button {
+    font-size:18px;
+    text-decoration:none;
+  }
   & li {
     display: flex;
     align-items: center;

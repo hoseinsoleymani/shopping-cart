@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
+import { imageUrl } from "../../../../api";
 import { ProductImageEl, Wrapper } from "./productImageStyles";
 
 interface Props {
@@ -27,10 +28,10 @@ const ProductImage: FC<Props> = ({ anotherImages }) => {
               isFluidWidth: false,
               width: 375,
               height: 271,
-              src: `http://localhost:1337${anotherImages[imgIndex].url}`,
+              src: `${imageUrl}${anotherImages[imgIndex].url}`,
             },
             largeImage: {
-              src: `http://localhost:1337${anotherImages[imgIndex].url}`,
+              src: `${imageUrl}${anotherImages[imgIndex].url}`,
               width: 600,
               height: 500,
             },
@@ -41,7 +42,7 @@ const ProductImage: FC<Props> = ({ anotherImages }) => {
       <div className="product__image-list">
         {anotherImages.map((item, index) => (
           <div key={item.id} onClick={() => setImgIndex(index)}>
-            <img src={`http://localhost:1337${item.url}`} />
+            <img src={`${imageUrl}${item.url}`} />
           </div>
         ))}
       </div>

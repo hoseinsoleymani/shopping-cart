@@ -5,8 +5,6 @@ interface Props {
   crumbs: string[];
 }
 
-// (crumb: string) => void; || (crumb: string): void
-
 const BreadCrumb: React.FC<Props> = ({ crumbs }) => {
   const isLast = (index: number): boolean => index === crumbs.length - 1;
   const navigate = useNavigate();
@@ -20,11 +18,11 @@ const BreadCrumb: React.FC<Props> = ({ crumbs }) => {
   return (
     <nav>
       <BreadcrumbWrapper>
-        {crumbs.map((crumb, ci) => {
-          const disabled = isLast(ci) ? "disabled" : "";
+        {crumbs.map((crumb, index) => {
+          const disabled = isLast(index) ? "disabled" : "";
 
           return (
-            <li key={ci} className="breadcrumb-item align-items-center">
+            <li key={index} className="breadcrumb-item align-items-center">
               <button
                 className={`btn btn-link ${disabled}`}
                 onClick={() => selected(crumb)}

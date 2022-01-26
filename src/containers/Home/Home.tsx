@@ -7,7 +7,7 @@ import HeaderProduct from "./components/HeaderProduct/HeaderProduct";
 import { Main, ProductsList } from "./homeStyles";
 import Title from "./components/Title/Title";
 import FilterBtns from "./components/FilterBtns/FilterBtns";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { useCartStore } from "../../store/store";
 import { MainLayout } from "./../../components/MainLayout";
 
@@ -46,7 +46,9 @@ const Home = () => {
             <FilterBtns />
             <Row>
               {filterProducts?.map((product) => (
-                <Product key={product.id} product={product} />
+                <Col key={product.id} xs="12" lg="3">
+                  <Product key={product.id} product={product} />
+                </Col>
               ))}
             </Row>
           </Container>

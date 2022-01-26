@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import ReactLoading from "react-loading";
 import { LoginBody } from "../../../api/useLogin";
-import { Wrapper, RememberPass , InputContainer} from "../loginStyles";
+import { Wrapper, RememberPass, InputContainer } from "../loginStyles";
 
 export interface loginUserType {
   identifier: string;
@@ -69,7 +69,9 @@ const Login = () => {
             placeholder="at least 8"
             value={values.password}
           />
-          {touched.password && errors.password && <div className="text-danger">{errors.password}</div>}
+          {touched.password && errors.password && (
+            <div className="text-danger">{errors.password}</div>
+          )}
         </InputContainer>
 
         <RememberPass>
@@ -77,7 +79,9 @@ const Login = () => {
           <label htmlFor="remember-me">Remember Me</label>
         </RememberPass>
 
-        <button type="submit" className="button">Log in</button>
+        <button type="submit" className="button">
+          Log in
+        </button>
 
         <NavLink to="/forgot-password">Forgot Password</NavLink>
 
