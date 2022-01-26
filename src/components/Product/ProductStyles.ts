@@ -8,14 +8,14 @@ export const Wrapper = styled.article`
   border-radius: 5px;
   over-flow: hidden;
   transition: 0.5s ease;
-  max-width:306px;
+  width: 300px;
   
   &:hover {
     transform: scale(0.9);
   }
 
   & > a > img {
-    max-width: 270px;
+    width: 270px;
   }
 
   & h3 {

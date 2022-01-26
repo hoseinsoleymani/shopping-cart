@@ -14,7 +14,7 @@ export const Wrapper = styled(NavLink)`
 
   & img {
     margin: 1rem 0;
-    width: 100%;
+    width: 340px;
     height: 170px;
   }
 

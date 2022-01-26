@@ -1,19 +1,33 @@
 import FilteringTitle from "./../FilteringTitle/FilteringTitle";
 import { PricesEl, Wrapper } from "./pricesStyles";
+import { useCartStore } from "../../../../store/store";
 
-const Prices = () => {
+interface Props
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {}
+
+const Prices: React.FC<Props> = ({ ...props }) => {
+  const { handleFilterPriceProducts, priceRange } = useCartStore();
+
   return (
     <Wrapper>
       <FilteringTitle title="PRICES" />
 
-      <div>
+      <PricesEl>
         <span>Ranger:</span>
-        <PricesEl>
-          <span>0</span>
-          <span>0</span>
-        </PricesEl>
-      </div>
-      <input type="range" />
+        <div>
+          <span>${priceRange}</span>-<span>$2500</span>
+        </div>
+      </PricesEl>
+      <input
+        type="range"
+        {...props}
+        onChange={handleFilterPriceProducts}
+        defaultValue={priceRange}
+        max="2500"
+      />
     </Wrapper>
   );
 };

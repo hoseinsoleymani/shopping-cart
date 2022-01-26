@@ -1,9 +1,10 @@
 import { lazy, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router";
 import { AuthLayout, MainLayout } from "../components/MainLayout";
-import { useAuthStore } from "../store/store";
+import { useAuthStore, useCartStore } from "../store/store";
 import { useGetUser } from "../api/useGetUser";
 import { decodedToken } from "./../utils/decoded";
+import { useProducts } from "../api/useProducts";
 
 const Home = lazy(() => import("./Home/Home"));
 const ProductPage = lazy(() => import("../components/ProductPage/ProductPage"));
@@ -16,16 +17,27 @@ const About = lazy(() => import("./About/About"));
 const Cart = lazy(() => import("./Cart/Cart"));
 
 const App = () => {
+
   const logout = useAuthStore((state) => state.logout);
   const login = useAuthStore((state) => state.login);
   const authPayload = decodedToken();
 
-   const { data: user } = useGetUser(authPayload?.id);
-
+  const { data: products, isError } = useProducts();
+  const { data: user } = useGetUser(authPayload?.id);
+  
+  const { setProducts } = useCartStore();
+  
   useEffect(() => {
     if (authPayload == null) logout();
     if (user) login(user);
   }, [user, authPayload]);
+
+
+  useEffect(() => {
+    if (products != null) setProducts(products);
+  }, [products]);
+
+  if (isError) return <p>{isError}</p>;
 
   return (
     <Routes>
@@ -36,7 +48,7 @@ const App = () => {
         <Route path="register" element={<Register />}></Route>
         <Route path="*" element={<Navigate to="/auth/login" />}></Route>
       </Route>
-    
+
       <Route path="/products" element={<Products />}></Route>
       <Route path="/contact" element={<Contact />}></Route>
       <Route path="/about" element={<About />}></Route>

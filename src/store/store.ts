@@ -10,14 +10,17 @@ interface CartStore {
   products: ProductType[] | undefined;
   filterProducts: ProductType[] | undefined;
   cartProducts: ProductType[];
+  filterProductsByPrice: ProductType[] | undefined;
   productsCounter: number;
   productAmount: number;
+  priceRange: number;
   handleProductsCounter: () => void;
   addToCart: (product: ProductType) => void;
   removeFromCart: (product: ProductType) => void;
   removeCurrentProduct: (product: ProductType) => void;
   handleFilterProduct: (category: string) => void;
   setProducts: (data: ProductType[]) => void;
+  handleFilterPriceProducts: (e: any) => void;
 }
 
 const useAuthStore = create<AuthStore>(
@@ -30,12 +33,14 @@ const useAuthStore = create<AuthStore>(
 );
 
 const useCartStore = create<CartStore>(
-  (set, get): CartStore => ({
+  (set): CartStore => ({
     products: [],
     cartProducts: [],
     filterProducts: [],
+    filterProductsByPrice: [],
     productsCounter: 0,
     productAmount: 0,
+    priceRange: 0,
     handleProductsCounter: () =>
       set((state) => {
         {
@@ -104,6 +109,7 @@ const useCartStore = create<CartStore>(
         return {
           products: data,
           filterProducts: data,
+          filterProductsByPrice: data,
         };
       });
     },
@@ -120,6 +126,24 @@ const useCartStore = create<CartStore>(
 
         return {
           filterProducts: currentProducts,
+        };
+      });
+    },
+    handleFilterPriceProducts: (e: any) => {
+      set((state) => {
+        const selectedPrice = e.target.value;
+
+        const currentProducts = state.products?.filter((product) => {
+          const { offProduct, price } = product;
+          const addOffToPrice = price * offProduct;
+          const currentPrice = price - Math.floor(addOffToPrice / 100);
+          console.log("called");
+          return currentPrice > +selectedPrice;
+        });
+
+        return {
+          filterProductsByPrice: currentProducts,
+          priceRange: selectedPrice,
         };
       });
     },

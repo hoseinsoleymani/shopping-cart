@@ -9,12 +9,13 @@ export interface PopularDeals {
 
 interface Props {
   hotDeals: PopularDeals[];
+  title: string;
 }
 
-const HotDeals: React.FC<Props> = ({ hotDeals }) => {
+const HotDeals: React.FC<Props> = ({ hotDeals, title }) => {
   return (
     <Wrapper>
-      <FilteringTitle title="Hot Deals" />
+      <FilteringTitle title={title} />
       <ol>
         {hotDeals.map((item) => (
           <li key={item.id}>

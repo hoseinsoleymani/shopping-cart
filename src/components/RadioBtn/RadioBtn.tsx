@@ -2,15 +2,19 @@ import { FC, useState } from "react";
 import { RadioBtnEl } from "./radioBtnStyles";
 
 interface Props {
-  color?: string;
+  color: string;
 }
 
 const RadioBtn: FC<Props> = ({ color }) => {
+  const [active, setActive] = useState(false);
   return (
-    <RadioBtnEl color={color}>
-      <input type="radio" name="radio" />
-      <span className="checkmark"></span>
-    </RadioBtnEl>
+    <RadioBtnEl
+      color={color}
+      active={active}
+      onClick={() => {
+        setActive(!active);
+      }}
+    ></RadioBtnEl>
   );
 };
 

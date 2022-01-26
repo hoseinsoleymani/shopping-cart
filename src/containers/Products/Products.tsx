@@ -3,21 +3,23 @@ import { Container, Row, Col } from "react-bootstrap";
 import { lazy } from "react";
 import { hotDeals } from "./data/hotDeals";
 import HotDeals from "./components/HotDeals/HotDeals";
-import { HeadSection } from "./productsStyles";
+import { HeadSection, FilterWrapper } from "./productsStyles";
 import Nav from "./components/Nav/Nav";
 import { useProducts } from "../../api/useProducts";
 import Product from "../../components/Product/Product";
 import Prices from "./components/Prices/Prices";
+import { useCartStore } from "../../store/store";
+import Color from "./components/Color/Color";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const Banner = lazy(() => import("./../../components/Banner/Banner"));
 const BreadCrumb = lazy(() => import("../../components/BreadCrumb/BreadCrumb"));
 
 const Products = () => {
-  const { data: products, isError, error } = useProducts();
+  const { filterProductsByPrice: products } = useCartStore();
 
   if (products == null) return <h2></h2>;
-
-  // if (isError) return <h2>{error}</h2>;
 
   return (
     <MainLayout>
@@ -27,15 +29,20 @@ const Products = () => {
           <Container>
             <Row>
               <Col md="12" lg="3">
-                <HotDeals hotDeals={hotDeals} />
-                <Prices />
+                <FilterWrapper>
+                  <HotDeals hotDeals={hotDeals} title="HOT DEALS" />
+                  <Prices />
+                  <Color />
+                  <HotDeals hotDeals={hotDeals} title="BRAND" />
+                  <Link to="/" className="button">MORE</Link>
+                </FilterWrapper>
               </Col>
               <Col md="12" lg="9">
                 <Banner />
                 <Nav />
                 <div className="d-flex flex-wrap justify-content-between">
                   {products.map((product) => (
-                    <Product product={product} />
+                    <Product key={product.id} product={product} />
                   ))}
                 </div>
               </Col>

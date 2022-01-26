@@ -14,7 +14,7 @@ interface Props {
 const Product: FC<Props> = ({ product }) => {
   const { id, title, price, image, offProduct } = product;
   const addOffToPrice = offProduct * price;
-  const currentPrice = Math.floor(addOffToPrice / 100);
+  const currentPrice = price - Math.floor(addOffToPrice / 100);
 
   return (
     <Wrapper className="product">

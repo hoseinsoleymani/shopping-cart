@@ -3,6 +3,7 @@ import { FaRegTimesCircle } from "react-icons/fa";
 import { Wrapper } from "./cartItemStyles";
 import { useCartStore } from "../../../store/store";
 import ProductBtns from "../../../components/ProductBtns/ProductBtns";
+import { imageUrl } from "../../../api";
 
 interface Props {
   product: ProductType;
@@ -26,7 +27,7 @@ const CartItem: FC<Props> = (product) => {
         </button>
 
         <img
-          src={`http://localhost:1337${image.url}`}
+          src={`${imageUrl}${image.url}`}
           alt={title}
           className="item__img-btn"
         />

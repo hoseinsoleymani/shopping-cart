@@ -12,16 +12,9 @@ import { useCartStore } from "../../store/store";
 import { MainLayout } from "./../../components/MainLayout";
 
 const Home = () => {
-  const { data, isError } = useProducts();
+  const { data: products, isError } = useProducts();
 
-  const { setProducts } = useCartStore();
   const { filterProducts } = useCartStore();
-
-  useEffect(() => {
-    if (data != null) {
-      setProducts(data);
-    }
-  }, [data]);
 
   if (isError) return <p>{isError}</p>;
 
@@ -33,7 +26,7 @@ const Home = () => {
         <section>
           <div className="container">
             <div className="header__products">
-              {data?.slice(0, 3).map((item) => (
+              {products?.slice(0, 3).map((item) => (
                 <HeaderProduct key={item.id} product={item} />
               ))}
             </div>
