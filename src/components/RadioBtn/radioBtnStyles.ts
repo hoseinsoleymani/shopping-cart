@@ -14,4 +14,5 @@ export const RadioBtnEl = styled.div<Props>`
   border: ${({ active }) => (active ? "3px solid #f6f7f8" : "0")};
   box-shadow: ${({ active, color }) =>
     active ? `0 0 0px 2px ${color}` : `0 0 5px 1px ${color}`};
+  margin-right: 1rem;
 `;

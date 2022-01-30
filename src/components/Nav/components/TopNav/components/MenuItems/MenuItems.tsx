@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import User from "../../../../../../svg/User.svg";
 import Cart from "../../../../../../svg/Cart.svg";
-import { CartLink, NavMenu, UserName } from "./menuItemsStyles";
+import { CartBtn, NavMenu, UserName } from "./menuItemsStyles";
 import { useAuthStore, useCartStore } from "../../../../../../store/store";
 import { NavLink } from "react-router-dom";
 
 const MenuItems = () => {
+
   const user = useAuthStore((state) => state.user);
   const cartProducts = useCartStore((state) => state.cartProducts);
   const productsCounter = useCartStore((state) => state.productsCounter);
+
   const handleProductsCounter = useCartStore(
     (state) => state.handleProductsCounter
   );
@@ -25,11 +27,13 @@ const MenuItems = () => {
           <UserName>{user !== undefined ? user.username : null}</UserName>
         </NavLink>
       </li>
-      <li>
-        <CartLink to="/cart" totalnumber={productsCounter.toString()}>
+      <CartBtn totalnumber={productsCounter.toString()}>
+        
+        <NavLink to="/cart" >
           <img src={Cart} alt="user" />
-        </CartLink>
-      </li>
+        </NavLink>
+      </CartBtn>
+
       <li>
         <NavLink to="/products">Items</NavLink>
       </li>

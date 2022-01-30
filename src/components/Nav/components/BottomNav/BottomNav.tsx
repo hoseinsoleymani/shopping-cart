@@ -1,12 +1,16 @@
 import Logo from "../../../Logo/Logo";
 import NavMenu from "./components/NavMenu/NavMenu";
-import { Wrapper } from './bottomNavStyles';
-const BottomNav = () => {
+import { Wrapper } from "./bottomNavStyles";
+interface Props {
+  showMenu: boolean;
+}
+
+const BottomNav: React.FC<Props> = ({ showMenu }) => {
   return (
     <Wrapper>
       <Logo link="/" />
 
-      <NavMenu />
+      <NavMenu showMenu={showMenu} />
     </Wrapper>
   );
 };

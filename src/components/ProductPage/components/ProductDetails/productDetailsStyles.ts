@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const ProductDetailsEl = styled.article`
+export const ProductDetailsEl = styled.div`
+  @media only screen and (max-width: 992px) {
+    max-width: 432px;
+    margin: 2rem auto;
+  }
+
   h3 {
     max-width: none;
     font-size: 24px;

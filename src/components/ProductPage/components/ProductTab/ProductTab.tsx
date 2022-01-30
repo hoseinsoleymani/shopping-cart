@@ -7,7 +7,7 @@ const ProductTab = () => {
   const [value, setValue] = useState(0);
   const currentContent = tabContents[value];
   return (
-    <Col xs="12" md="6" lg="9">
+    <Col md="12" lg="9">
       <Tab>
         <TabHeader>
           {tabContents.map((item, index) => (

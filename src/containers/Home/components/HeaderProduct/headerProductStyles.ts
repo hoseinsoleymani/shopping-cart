@@ -8,6 +8,9 @@ export const Wrapper = styled(NavLink)`
   border-radius: 5px;
   padding: 2rem;
   transition: 0.5s ease;
+  max-width: 432px;
+  margin: 0 auto;
+
   &:hover {
     background-color: #e4e4e4;
   }
@@ -28,5 +31,13 @@ export const Wrapper = styled(NavLink)`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  
+  @media only screen and (max-width: 1300px) {
+    margin: 1rem auto;
+  }
+
+  @media only screen and (max-width: 992px) {
+    margin:2rem 1rem;
   }
 `;

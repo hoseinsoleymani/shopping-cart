@@ -1,10 +1,27 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div``;
+
+export const ResponsiveWrapper = styled.div`
+  display: none;
+
+  @media only screen and (max-width: 992px) {
+    display: block;
+    margin-top:1rem;
+    img {
+      width: 100%;
+    }
+  }
+`;
+
+export const DesktopWrapper = styled.div`
   color: #fff;
   background-color: #40bfff;
   padding: 0 3rem;
   height: 300px;
+  @media only screen and (max-width: 992px) {
+  display:none;
+  }
 `;
 
 export const RightDiv = styled.div`

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const client = axios.create({
-  baseURL: "https://online-store-backend8423.herokuapp.com",
+  baseURL: "http://localhost:1337",
 });
 
-export const imageUrl = "https://online-store-backend8423.herokuapp.com"
+export const imageUrl = "http://localhost:1337"

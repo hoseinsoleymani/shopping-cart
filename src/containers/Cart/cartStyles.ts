@@ -3,10 +3,29 @@ import styled from "styled-components";
 export const CurrentDataTitle = styled.p`
   font-size: 3rem;
   text-align: center;
-  height:300px;
-  padding-top:3rem;
+  height: 300px;
+  padding-top: 3rem;
 `;
-export const Wrapper = styled.div``;
+
+export const Wrapper = styled.div`
+  @media only screen and (max-width: 992px) {
+    .left_container {
+      justify-content: flex-start;
+    }
+    .left_container img {
+      margin-left: 2rem;
+    }
+    .left_container span:last-child {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .right-container > span {
+      display: none;
+    }
+  }
+`;
 
 export const CartHeader = styled.div`
   display: flex;

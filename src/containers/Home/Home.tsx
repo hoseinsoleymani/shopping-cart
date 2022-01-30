@@ -1,13 +1,11 @@
-import { useEffect } from "react";
 import { useProducts } from "../../api/useProducts";
 import Product from "../../components/Product/Product";
-import { isString } from "formik";
 import Header from "./components/Header/Header";
 import HeaderProduct from "./components/HeaderProduct/HeaderProduct";
-import { Main, ProductsList } from "./homeStyles";
+import { Main, ProductsList, ProductsEl } from "./homeStyles";
 import Title from "./components/Title/Title";
 import FilterBtns from "./components/FilterBtns/FilterBtns";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useCartStore } from "../../store/store";
 import { MainLayout } from "./../../components/MainLayout";
 
@@ -24,7 +22,7 @@ const Home = () => {
 
       <Main>
         <section>
-          <div className="container">
+          <div className="header-products__container">
             <div className="header__products">
               {products?.slice(0, 3).map((item) => (
                 <HeaderProduct key={item.id} product={item} />
@@ -34,17 +32,17 @@ const Home = () => {
         </section>
 
         <ProductsList>
-          <Container>
+          <div className="custom-container">
             <Title title="BEST SELLER" />
             <FilterBtns />
-            <Row>
+            <ProductsEl className="d-flex flex-lg-wrap justify-content-between">
               {filterProducts?.map((product) => (
-                <Col key={product.id} xs="12" lg="3">
+                <div key={product.id}>
                   <Product key={product.id} product={product} />
-                </Col>
+                </div>
               ))}
-            </Row>
-          </Container>
+            </ProductsEl>
+          </div>
         </ProductsList>
       </Main>
     </MainLayout>

@@ -42,7 +42,7 @@ const Products = () => {
               <Col md="12" lg="9">
                 <Banner />
                 <Nav />
-                <div className="d-flex flex-wrap justify-content-between">
+                <div className="d-flex flex-sm-wrap justify-content-between products__list">
                   {products.slice(0, productsLength).map((product) => (
                     <Product key={product.id} product={product} />
                   ))}

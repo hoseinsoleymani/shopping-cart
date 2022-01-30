@@ -39,7 +39,7 @@ const Register = () => {
   return (
     <>
       <Wrapper>
-        <h2>Register</h2>
+        <h3>Register</h3>
         <form action="" onSubmit={handleSubmit}>
           <InputContainer>
             <Input
@@ -95,17 +95,16 @@ const Register = () => {
 
           <hr />
 
-          <div>
+          <p className="last">
             Already have an account
             <br />
             <NavLink to="/register">Login</NavLink>
-          </div>
+          </p>
         </form>
         {isLoading && (
           <ReactLoading type={"bars"} color={"#45486e"} width={175} />
         )}
       </Wrapper>
-      )
     </>
   );
 };

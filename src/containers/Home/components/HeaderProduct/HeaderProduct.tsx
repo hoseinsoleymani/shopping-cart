@@ -5,6 +5,7 @@ import ProductOffTitle from "../../../../components/ProductOffTitle/ProductOffTi
 import NewPrice from "../../../../components/NewPrice/NewPrice";
 import { Wrapper } from "./headerProductStyles";
 import { imageUrl } from "../../../../api";
+import SupportImage from "./../../../../components/SupportImage/SupportImage";
 
 interface Props {
   product: ProductType;
@@ -21,7 +22,8 @@ const HeaderProduct: FC<Props> = ({ product }) => {
         <ProductTitle title={title} />
         <NewPrice text={currentPrice} />
       </header>
-      <img src={`${imageUrl}${image.url}`} alt={title} />
+
+      <SupportImage imgUrl={`${image.url}`} />
       <div className="product__footer">
         <ProductPrice text={price} />
         <ProductOffTitle title={offProduct} />

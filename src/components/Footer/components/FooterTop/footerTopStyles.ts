@@ -8,4 +8,8 @@ export const Wrapper = styled.div`
   & > div:first-child img{
     margin-bottom:2rem;
   }
+
+  @media only screen and (max-width: 768px) {
+    display:none;
+  }
 `;

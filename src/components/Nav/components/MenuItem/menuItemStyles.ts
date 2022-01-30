@@ -11,4 +11,8 @@ export const Li = styled.li<Props>`
     font-size: 20px;
     color: #262626;
   }
+
+  svg {
+    margin-right:1rem;
+  }
 `;

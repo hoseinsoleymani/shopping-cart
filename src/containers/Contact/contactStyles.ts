@@ -4,13 +4,13 @@ export const ContactBox = styled.form`
   display: flex;
   box-shadow: 0 0 10px #ddd;
   margin: 8rem 0;
-  color:#fff;
+  color: #fff;
 
   & h2 {
     max-width: 340px;
-    justify-content:center;
-    font-size:40px;
-    transform:translateY(115px);
+    justify-content: center;
+    font-size: 40px;
+    transform: translateY(115px);
   }
 
   & > div {
@@ -32,27 +32,34 @@ export const ContactBox = styled.form`
     border-radius: 7px;
     outline: none;
     height: 230px;
-    resize:none;
+    resize: none;
   }
 
+  & button {
+    background-color: #33a0ff;
+    color: #fff;
+    padding: 0.7rem;
+    display: block;
+    margin-top: 2rem;
+    width: 140px;
+    border-radius: 5px;
+  }
 
- & button {
-    background-color: #33A0FF;
-    color:#fff;
-    padding:0.7rem;
-    display:block;
-    margin-top:2rem;
-    width:140px;
-    border-radius:5px;
+  @media only screen and (max-width: 992px) {
+    flex-direction: column;
+
+    > div {
+      width: auto;
+    }
+
+    h2, p {
+      display:none !important;
+    }
   }
 `;
 
 export const LeftDiv = styled.div`
   background-color: #40bfff;
-
-  & > div {
-
-  }
 `;
 
 export const RightDiv = styled.div`

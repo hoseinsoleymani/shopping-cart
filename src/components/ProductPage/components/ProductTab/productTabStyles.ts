@@ -31,6 +31,25 @@ export const TabHeader = styled.div`
     border-bottom-color: #2e90e5;
   }
   border-bottom: 4.8px solid #e5e8ea;
+
+  @media only screen and (max-width: 768px) {
+    button {
+      margin: 0 1rem;
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    padding: 0;
+
+    button:last-child {
+      display:none;
+    }
+
+
+    button {
+      margin: 0;
+      flex-grow: 1;
+    }
+  }
 `;
 
 export const TabBody = styled.div`

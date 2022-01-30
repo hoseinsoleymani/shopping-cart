@@ -23,6 +23,7 @@ import ProductBtns from "./../../../ProductBtns/ProductBtns";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { GrFacebookOption } from "react-icons/gr";
 import { BsTwitter } from "react-icons/bs";
+
 interface Props {
   product: ProductType;
 }

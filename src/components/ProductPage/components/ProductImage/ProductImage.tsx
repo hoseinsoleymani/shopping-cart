@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import ReactImageMagnify from "react-image-magnify";
 import { imageUrl } from "../../../../api";
 import { ProductImageEl, Wrapper } from "./productImageStyles";
+import SupportImage from "./../../../SupportImage/SupportImage";
 
 interface Props {
   image: {
@@ -42,7 +43,7 @@ const ProductImage: FC<Props> = ({ anotherImages }) => {
       <div className="product__image-list">
         {anotherImages.map((item, index) => (
           <div key={item.id} onClick={() => setImgIndex(index)}>
-            <img src={`${imageUrl}${item.url}`} />
+            <SupportImage imgUrl={`${item.url}`} />
           </div>
         ))}
       </div>

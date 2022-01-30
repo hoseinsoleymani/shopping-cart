@@ -8,14 +8,15 @@ export const Wrapper = styled.article`
   border-radius: 5px;
   over-flow: hidden;
   transition: 0.5s ease;
-  width: 300px;
-  
+  width: 305px;
+  margin: 0 0.5rem;
+
   &:hover {
     transform: scale(0.9);
   }
 
   & > a > img {
-    width: 270px;
+    width: 80%;
   }
 
   & h3 {
@@ -52,6 +53,37 @@ export const Wrapper = styled.article`
     max-width: 130px;
     margin: 0.5rem auto;
   }
+  
+  @media only screen and (max-width: 992px) {
+    padding: 1rem;
+    width: 211px;
+    margin: 0 0.5rem;
+
+    & a:first-child {
+      height: 160px;
+    }
+
+    & footer {
+      padding: 1rem 0;
+    }
+
+    & footer * {
+      text-align: left;
+    }
+
+    & footer > div:nth-child(2) {
+      margin: 0.5rem 0;
+    }
+
+    & footer > div:nth-child(3) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    & footer > div:nth-child(3) > div {
+      margin: 0;
+    }
+  }
 `;
 
 export const ProductImgLink = styled(NavLink)`
@@ -60,4 +92,9 @@ export const ProductImgLink = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media only screen and (max-width: 992px) {
+    & > img {
+      width: 90% !important;
+    }
+  }
 `;

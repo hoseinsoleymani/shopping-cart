@@ -7,11 +7,15 @@ import Brand2 from "../../svg/Footer-icon-2.svg";
 import Brand3 from "../../svg/Footer-icon-3.svg";
 import Brand4 from "../../svg/Footer-icon-4.svg";
 import { NavLink } from "react-router-dom";
+import Logo from "../Logo/Logo";
 
 const Footer = () => {
   return (
     <Wrapper>
       <Container>
+        <div className="text-center mb-5">
+          <Logo link="/" />
+        </div>
         <FooterTop />
         <FooterBottom />
 

@@ -31,6 +31,31 @@ export const NavWrapper = styled.nav`
     border-radius: 5px;
     margin-left: 1rem;
   }
+
+  @media only screen and (max-width: 768px) {
+    span {
+      display: none;
+    }
+
+    select {
+      margin-right: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 475px) {
+    img {
+      display: none;
+    }
+    select {
+      margin: 0;
+    }
+  }
+
+  @media only screen and (max-width: 350px) {
+    select {
+      width: 120px;
+    }
+  }
 `;
 
 export const TemplateBtn = styled.div`

@@ -40,14 +40,15 @@ export const Wrapper = styled.div`
     margin:1rem 0;
   }
 
-  /* button */
+
   p.last {
     text-align: center;
     font-size: 12px;
   }
 
-  .error {
-
+  @media only screen and (max-width: 500px) {
+    width: 90%;
+    padding: 1rem;
   }
 `;
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.footer`
   background-color: #bcddfe;
   padding-top: 10rem;
   padding-bottom: 3rem;
@@ -23,6 +23,18 @@ export const Wrapper = styled.div`
 
     img:last-child {
       margin-right: 0;
+    }
+  }
+
+  & > div > div:first-child img {
+    display: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding-top: 2rem;
+
+    img {
+      display: inline;
     }
   }
 `;

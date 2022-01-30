@@ -7,6 +7,7 @@ import { ProductImgLink, Wrapper } from "./ProductStyles";
 import StarGray from "../../svg/Star-gray.svg";
 import StarGold from "../../svg/Star-gold.svg";
 import { imageUrl } from "../../api/index";
+import SupportImage from "../SupportImage/SupportImage";
 interface Props {
   product: ProductType;
 }
@@ -14,16 +15,12 @@ interface Props {
 const Product: FC<Props> = ({ product }) => {
   const { id, title, price, image, offProduct } = product;
   const addOffToPrice = offProduct * price;
-  const currentPrice = price - Math.floor(addOffToPrice / 100);
+  const currentPrice = Math.floor(price - Math.floor(addOffToPrice / 100));
 
   return (
     <Wrapper className="product">
       <ProductImgLink to={`/products/${id}`}>
-        <img
-          src={`${imageUrl}${image.url}`}
-          className="product__image"
-          alt={title}
-        />
+        <SupportImage imgUrl={`${image.url}`} />
       </ProductImgLink>
 
       <footer>

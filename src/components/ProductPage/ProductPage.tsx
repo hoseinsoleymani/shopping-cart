@@ -10,6 +10,8 @@ import ProductTab from "./components/ProductTab/ProductTab";
 import Title from "../../containers/Home/components/Title/Title";
 import { useProducts } from "../../api/useProducts";
 import Product from "../Product/Product";
+import { Wrapper, ProductsContainer } from "./productPageStyles";
+import { ProductsEl } from "../../containers/Home/homeStyles";
 
 const ProductPage = () => {
   let { id } = useParams();
@@ -22,47 +24,48 @@ const ProductPage = () => {
   return (
     <MainLayout>
       <BreadCrumb crumbs={["Home", "products", product.title]} />
-
-      <section className="my-5">
-        <Container>
-          <Row>
-            <Col xs="12" md="6" lg="4">
-              <ProductImage
-                anotherImages={product.anotherImage}
-                image={product.image}
-              />
-            </Col>
-
-            <Col xs="12" md="6" lg="5">
-              <ProductDetails product={product} />
-            </Col>
-
-            <Col xs="12" md="6" lg="3">
-              <ProductSlider />
-            </Col>
-          </Row>
-
-          <Row>
-            <ProductTab />
-          </Row>
-        </Container>
-      </section>
-
-      <section className="pt-4">
-        <Title title="RELATED PRODUCTS" />
-
-        <Container>
-          <div className="py-5">
+      <Wrapper>
+        <section className="my-5">
+          <Container>
             <Row>
-              {products.slice(0, 4).map((item) => (
-                <Col key={item.id} xs="12" lg="3">
-                  <Product product={item} key={item.id} />
-                </Col>
-              ))}
+              <Col xs="12" md="12" lg="4">
+                <ProductImage
+                  anotherImages={product.anotherImage}
+                  image={product.image}
+                />
+              </Col>
+
+              <Col xs="12" md="12" lg="5">
+                <ProductDetails product={product} />
+              </Col>
+
+              <Col xs="12" md="6" lg="3">
+                <ProductSlider />
+              </Col>
             </Row>
-          </div>
-        </Container>
-      </section>
+
+            <Row>
+              <ProductTab />
+            </Row>
+          </Container>
+        </section>
+
+        <section className="pt-4">
+          <Title title="RELATED PRODUCTS" />
+
+          <Container>
+            <ProductsContainer className="py-5">
+              <ProductsEl className="d-flex flex-lg-wrap justify-content-between">
+                {products.slice(0, 4).map((item) => (
+                  <div key={item.id}>
+                    <Product product={item} key={item.id} />
+                  </div>
+                ))}
+              </ProductsEl>
+            </ProductsContainer>
+          </Container>
+        </section>
+      </Wrapper>
     </MainLayout>
   );
 };
